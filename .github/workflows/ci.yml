@@ -1,0 +1,28 @@
+name: Notebook CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  notebooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install notebook tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jupyter nbconvert nbformat
+      - name: Install project dependencies
+        run: |
+          python -m pip install -r requirements.txt
+      - name: Execute notebooks
+        run: |
+          find . -name "*.ipynb" -not -path "./.git/*" -print0 | \
+            xargs -0 -I {} jupyter nbconvert --execute --to notebook --inplace {}
