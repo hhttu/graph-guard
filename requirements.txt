@@ -2,3 +2,4 @@ networkx
 transformers
 scipy
 matplotlib
+pandas
