@@ -1,4 +1,5 @@
 corrupted_graphs/
+repaired_graphs/
 
 # Python artifacts
 __pycache__/
@@ -26,3 +27,6 @@ env/
 Thumbs.db
 .idea/
 .vscode/
+
+# For the Gemini API key
+.env
